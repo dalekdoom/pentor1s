@@ -26,6 +26,7 @@ public class Pentomino extends GameLogic implements InputProcessor {
     private int p;
     private int r;
     private int minimalDropHeight=Integer.MAX_VALUE;
+
     private static int[][] board= new int[ROWS][COLS];
 
     public Pentomino(int p,int r){

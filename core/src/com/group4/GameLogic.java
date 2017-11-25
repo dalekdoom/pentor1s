@@ -15,7 +15,6 @@ import static com.group4.GameScreen.game;
 
 public abstract class GameLogic {
     int[] piece=new int[9];
-    int[][] board= new int[ROWS][COLS];
     private int maxRow=0;
     private int maxCol=0;
     private int minCol=0;
@@ -31,6 +30,7 @@ public abstract class GameLogic {
     private static int[][] listOfClumps = new int[ROWS][COLS];
     private static int clumpNumber;
     private static int fullLines;
+    private static int[][] board= new int[ROWS][COLS];
 
     public GameLogic() {}
 
@@ -108,6 +108,9 @@ public abstract class GameLogic {
     public int[][] getBoard(){
         return board;
     }
+    public int[][] getClumps(){
+        return listOfClumps;
+    }
     /**
      Removes completely filled horizontal lines of the board.
      @param : the number of cells of that row that is occupied by a pentomino
@@ -148,7 +151,7 @@ public abstract class GameLogic {
                 for (int c = 0; c < COLS; c++)
                     for (int r = ROWS - 1; r >= 0; r--)
                         if (listOfClumps[r][c] == i)
-                            if (r != ROWS - 1)
+                            if (r < ROWS - 1)
                                 if (board[r + 1][c] > 0) {
                                     newPossible.remove(i);
                                     break outerloop;
@@ -162,27 +165,29 @@ public abstract class GameLogic {
             }
             System.out.println(possibleClumps);
             System.out.println(newPossible);
-            for(Integer i:newPossible){
-                for(int r=ROWS-1;r>=0;r--)
-                    for (int c=0; c<COLS; c++)
-                        if (listOfClumps[r][c]==i){
-                            board[r+1][c]=board[r][c];
-                            board[r][c]=0;
-                            listOfClumps[r+1][c]=listOfClumps[r][c];
-                            listOfClumps[r][c]=0;
-                        }
-                }
+            for(int r=ROWS-1;r>=0;r--)
+                for (int c=0; c<COLS; c++)
+                    if (listOfClumps[r][c]>0){
+                        for(Integer i:newPossible)
+                            if(listOfClumps[r][c]==i){
+                                board[r+1][c]=board[r][c];
+                                board[r][c]=0;
+                                listOfClumps[r+1][c]=listOfClumps[r][c];
+                                listOfClumps[r][c]=0;
+                            }
+                    }
             realisticFall(newPossible);
         }
     }
 
     public void identifyClumps() {
         clumpNumber=0;
+        listOfClumps=new int[ROWS][COLS];
         for(int i=ROWS-1;i>=0;i--)
             for(int j=0;j<COLS;j++)
                 if(board[i][j]>0)
                     if(!inClumps(i,j)){
-                        clumpNumber++;
+                        ++clumpNumber;
                         identifyClump(j,i,clumpNumber);}
     }
 

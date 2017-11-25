@@ -41,6 +41,18 @@ public class GameScreen extends GameLogic implements Screen {
     private TextButton newGameButton;
     private Skin skin;
     private Texture score1;
+    private int[][] clumps;
+    private Texture block2;
+    private Texture block3;
+    private Texture block4;
+    private Texture block5;
+    private Texture block6;
+    private Texture block7;
+    private Texture block8;
+    private Texture block9;
+    private Texture block10;
+    private Texture block11;
+    private Texture block12;
 
     public GameScreen(TetrisGame game) {
         this.game = game;
@@ -72,9 +84,22 @@ public class GameScreen extends GameLogic implements Screen {
     public void show() {
         super.init();
         board=super.getBoard();
+        clumps=super.getClumps();
         background = new Texture(Gdx.files.internal("tetris_bg_main2.png"));
-        block1 = new Texture(Gdx.files.internal("tetris_block2.png"));
+        block1 = new Texture(Gdx.files.internal("tetris_block1.png"));
+        block2 = new Texture(Gdx.files.internal("tetris_block2.png"));
+        block3 = new Texture(Gdx.files.internal("tetris_block3.png"));
+        block4 = new Texture(Gdx.files.internal("tetris_block4.png"));
+        block5 = new Texture(Gdx.files.internal("tetris_block5.png"));
+        block6 = new Texture(Gdx.files.internal("tetris_block6.png"));
+        block7 = new Texture(Gdx.files.internal("tetris_block7.png"));
+        block8 = new Texture(Gdx.files.internal("tetris_block8.png"));
+        block9 = new Texture(Gdx.files.internal("tetris_block9.png"));
+        block10 = new Texture(Gdx.files.internal("tetris_block10.png"));
+        block11 = new Texture(Gdx.files.internal("tetris_block11.png"));
+        block12 = new Texture(Gdx.files.internal("tetris_block12.png"));
         aimBlock = new Texture(Gdx.files.internal("aim_block.png"));
+        score1=new Texture(Gdx.files.internal("score_1.png"));
         batch = new SpriteBatch();
         time=System.currentTimeMillis();
         renderer= new ShapeRenderer();
@@ -132,7 +157,6 @@ public class GameScreen extends GameLogic implements Screen {
             drawNext(height);
             drawText(height);
             if (super.getFullLines() > 0) {
-                score1 = new Texture(Gdx.files.internal("score_" + toString(1) + ".png"));
                 batch.begin();
                 batch.draw(score1, width / 2 - 3 / 2 * (width / COLS), height / 2 - (height / ROWS), 3 * (width / COLS), 2 * (height / ROWS));
                 batch.end();
@@ -156,24 +180,110 @@ public class GameScreen extends GameLogic implements Screen {
 
     private void drawNext(int height) {
         next=super.displayNext();
-        block1 = new Texture(Gdx.files.internal("tetris_block"+toString(next[0])+".png"));
         batch.begin();
-        batch.draw(block1,Math.round(1.5*width), (ROWS-2)*(height / ROWS), (width / COLS), (height / ROWS));
-        batch.end();
-        for(int i=1;i<next.length;i+=2){
-            batch.begin();
-            batch.draw(block1,Math.round(1.5*width)+next[i+1] * (width / COLS), (ROWS-2-next[i])*(height / ROWS), (width / COLS), (height / ROWS));
-            batch.end();
+        switch (next[0]) {
+            case 1:  batch.draw(block1,Math.round(1.5*width), (ROWS-2)*(height / ROWS), (width / COLS), (height / ROWS));
+                for(int i=1;i<next.length;i+=2){
+                    batch.draw(block1,Math.round(1.5*width)+next[i+1] * (width / COLS), (ROWS-2-next[i])*(height / ROWS), (width / COLS), (height / ROWS));
+                }
+                break;
+            case 2:  batch.draw(block2,Math.round(1.5*width), (ROWS-2)*(height / ROWS), (width / COLS), (height / ROWS));
+                for(int i=1;i<next.length;i+=2){
+                    batch.draw(block2,Math.round(1.5*width)+next[i+1] * (width / COLS), (ROWS-2-next[i])*(height / ROWS), (width / COLS), (height / ROWS));
+                }
+                break;
+            case 3:  batch.draw(block3,Math.round(1.5*width), (ROWS-2)*(height / ROWS), (width / COLS), (height / ROWS));
+                for(int i=1;i<next.length;i+=2){
+                    batch.draw(block3,Math.round(1.5*width)+next[i+1] * (width / COLS), (ROWS-2-next[i])*(height / ROWS), (width / COLS), (height / ROWS));
+                }
+                break;
+            case 4:  batch.draw(block4,Math.round(1.5*width), (ROWS-2)*(height / ROWS), (width / COLS), (height / ROWS));
+                for(int i=1;i<next.length;i+=2){
+                    batch.draw(block4,Math.round(1.5*width)+next[i+1] * (width / COLS), (ROWS-2-next[i])*(height / ROWS), (width / COLS), (height / ROWS));
+                }
+                break;
+            case 5:  batch.draw(block5,Math.round(1.5*width), (ROWS-2)*(height / ROWS), (width / COLS), (height / ROWS));
+                for(int i=1;i<next.length;i+=2){
+                    batch.draw(block5,Math.round(1.5*width)+next[i+1] * (width / COLS), (ROWS-2-next[i])*(height / ROWS), (width / COLS), (height / ROWS));
+                }
+                break;
+            case 6:  batch.draw(block6,Math.round(1.5*width), (ROWS-2)*(height / ROWS), (width / COLS), (height / ROWS));
+                for(int i=1;i<next.length;i+=2){
+                    batch.draw(block6,Math.round(1.5*width)+next[i+1] * (width / COLS), (ROWS-2-next[i])*(height / ROWS), (width / COLS), (height / ROWS));
+                }
+                break;
+            case 7:  batch.draw(block7,Math.round(1.5*width), (ROWS-2)*(height / ROWS), (width / COLS), (height / ROWS));
+                for(int i=1;i<next.length;i+=2){
+                    batch.draw(block7,Math.round(1.5*width)+next[i+1] * (width / COLS), (ROWS-2-next[i])*(height / ROWS), (width / COLS), (height / ROWS));
+                }
+                break;
+            case 8:  batch.draw(block8,Math.round(1.5*width), (ROWS-2)*(height / ROWS), (width / COLS), (height / ROWS));
+                for(int i=1;i<next.length;i+=2){
+                    batch.draw(block8,Math.round(1.5*width)+next[i+1] * (width / COLS), (ROWS-2-next[i])*(height / ROWS), (width / COLS), (height / ROWS));
+                }
+                break;
+            case 9:  batch.draw(block9,Math.round(1.5*width), (ROWS-2)*(height / ROWS), (width / COLS), (height / ROWS));
+                for(int i=1;i<next.length;i+=2){
+                    batch.draw(block9,Math.round(1.5*width)+next[i+1] * (width / COLS), (ROWS-2-next[i])*(height / ROWS), (width / COLS), (height / ROWS));
+                }
+                break;
+            case 10: batch.draw(block10,Math.round(1.5*width), (ROWS-2)*(height / ROWS), (width / COLS), (height / ROWS));
+                for(int i=1;i<next.length;i+=2){
+                    batch.draw(block10,Math.round(1.5*width)+next[i+1] * (width / COLS), (ROWS-2-next[i])*(height / ROWS), (width / COLS), (height / ROWS));
+                }
+                break;
+            case 11: batch.draw(block11,Math.round(1.5*width), (ROWS-2)*(height / ROWS), (width / COLS), (height / ROWS));
+                for(int i=1;i<next.length;i+=2){
+                    batch.draw(block11,Math.round(1.5*width)+next[i+1] * (width / COLS), (ROWS-2-next[i])*(height / ROWS), (width / COLS), (height / ROWS));
+                }
+                break;
+            case 12: batch.draw(block12,Math.round(1.5*width), (ROWS-2)*(height / ROWS), (width / COLS), (height / ROWS));
+                for(int i=1;i<next.length;i+=2){
+                    batch.draw(block12,Math.round(1.5*width)+next[i+1] * (width / COLS), (ROWS-2-next[i])*(height / ROWS), (width / COLS), (height / ROWS));
+                }
+                break;
+            default: batch.draw(block1,Math.round(1.5*width), (ROWS-2)*(height / ROWS), (width / COLS), (height / ROWS));
+                for(int i=1;i<next.length;i+=2){
+                    batch.draw(block1,Math.round(1.5*width)+next[i+1] * (width / COLS), (ROWS-2-next[i])*(height / ROWS), (width / COLS), (height / ROWS));
+                }
+                break;
         }
+        batch.end();
     }
 
     private void drawShape(int height) {
         for (int i = 0; i < ROWS; i++) {
             for (int j = 0; j < COLS; j++) {
                 if (board[i][j] != 0&& board[i][j] != -1) {
-                    block = new Texture(Gdx.files.internal("tetris_block"+toString(board[i][j])+".png"));
                     batch.begin();
-                    batch.draw(block,j * (width / COLS), (ROWS-1-i) * (height / ROWS), (width / COLS), (height / ROWS));
+                    switch (board[i][j]) {
+                        case 1:  batch.draw(block1,j * (width / COLS), (ROWS-1-i) * (height / ROWS), (width / COLS), (height / ROWS));
+                            break;
+                        case 2:  batch.draw(block2,j * (width / COLS), (ROWS-1-i) * (height / ROWS), (width / COLS), (height / ROWS));
+                            break;
+                        case 3:  batch.draw(block3,j * (width / COLS), (ROWS-1-i) * (height / ROWS), (width / COLS), (height / ROWS));
+                            break;
+                        case 4:  batch.draw(block4,j * (width / COLS), (ROWS-1-i) * (height / ROWS), (width / COLS), (height / ROWS));
+                            break;
+                        case 5:  batch.draw(block5,j * (width / COLS), (ROWS-1-i) * (height / ROWS), (width / COLS), (height / ROWS));
+                            break;
+                        case 6:  batch.draw(block6,j * (width / COLS), (ROWS-1-i) * (height / ROWS), (width / COLS), (height / ROWS));
+                            break;
+                        case 7:  batch.draw(block7,j * (width / COLS), (ROWS-1-i) * (height / ROWS), (width / COLS), (height / ROWS));
+                            break;
+                        case 8:  batch.draw(block8,j * (width / COLS), (ROWS-1-i) * (height / ROWS), (width / COLS), (height / ROWS));
+                            break;
+                        case 9:  batch.draw(block9,j * (width / COLS), (ROWS-1-i) * (height / ROWS), (width / COLS), (height / ROWS));
+                            break;
+                        case 10: batch.draw(block10,j * (width / COLS), (ROWS-1-i) * (height / ROWS), (width / COLS), (height / ROWS));
+                            break;
+                        case 11: batch.draw(block11,j * (width / COLS), (ROWS-1-i) * (height / ROWS), (width / COLS), (height / ROWS));
+                            break;
+                        case 12: batch.draw(block12,j * (width / COLS), (ROWS-1-i) * (height / ROWS), (width / COLS), (height / ROWS));
+                            break;
+                        default: batch.draw(block1,j * (width / COLS), (ROWS-1-i) * (height / ROWS), (width / COLS), (height / ROWS));
+                            break;
+                    }
                     batch.end();
                 }
                 else if(board[i][j] == -1){
