@@ -140,13 +140,15 @@ public class GameScreen extends GameLogic implements Screen {
     @Override
     public void render(float sth) {
         if (super.getRun()){
+            System.out.println(super.getRun());
             int height = Gdx.graphics.getHeight();
             if (System.currentTimeMillis() - time >= TIMESPAN_NORMAL) {
                 if (!super.fall()) {
                     super.checkFullLines();
                     if (!super.init()) {
+                        super.setRun(false);
                         highscore.add(getScore(),"Micheal");
-                        super.reset();
+                        //super.reset();
                     }
                 }
                 time = System.currentTimeMillis();

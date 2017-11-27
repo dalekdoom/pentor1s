@@ -23,7 +23,7 @@ public abstract class GameLogic {
     private int p;
     private Pentomino pentomino2;
     private Pentomino pentomino;
-    private boolean run=true;
+    private boolean run=false;
 
     private static Pentomino[] pentos=new Pentomino[2];
     private static int highscore;
@@ -76,7 +76,6 @@ public abstract class GameLogic {
     }
 
     public void reset() {
-        run=false;
         highscore=0;
         //pentos[0].resetPento();
         listOfClumps = new int[ROWS][COLS];
