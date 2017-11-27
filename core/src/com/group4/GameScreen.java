@@ -53,6 +53,7 @@ public class GameScreen extends GameLogic implements Screen {
     private Texture block10;
     private Texture block11;
     private Texture block12;
+    private HighScore highscore;
 
     public GameScreen(TetrisGame game) {
         this.game = game;
@@ -100,6 +101,7 @@ public class GameScreen extends GameLogic implements Screen {
         block12 = new Texture(Gdx.files.internal("tetris_block12.png"));
         aimBlock = new Texture(Gdx.files.internal("aim_block.png"));
         score1=new Texture(Gdx.files.internal("score_1.png"));
+        highscore= new HighScore();
         batch = new SpriteBatch();
         time=System.currentTimeMillis();
         renderer= new ShapeRenderer();
@@ -141,8 +143,9 @@ public class GameScreen extends GameLogic implements Screen {
             int height = Gdx.graphics.getHeight();
             if (System.currentTimeMillis() - time >= TIMESPAN_NORMAL) {
                 if (!super.fall()) {
-                    super.removeLine();
+                    super.checkFullLines();
                     if (!super.init()) {
+                        highscore.add(getScore(),"Micheal");
                         super.reset();
                     }
                 }
@@ -171,10 +174,12 @@ public class GameScreen extends GameLogic implements Screen {
         font.setColor(Color.BLACK);
         font.getData().setScale(2f);
         font.draw(batch, "Score", Math.round(1.5*width),(ROWS-7)*(height / ROWS));
-        batch.end();
-        batch.begin();
         font.getData().setScale(2f);
         font.draw(batch, super.toString(getScore()), Math.round(1.5*width),(ROWS-7)*(height / ROWS)-50);
+        batch.end();
+        batch.begin();
+        font.draw(batch, "Highscore", Math.round(1.5*width),(ROWS-5)*(height / ROWS));
+        font.draw(batch, super.toString(highscore.TopScore()), Math.round(1.5*width),(ROWS-5)*(height / ROWS)-50);
         batch.end();
     }
 

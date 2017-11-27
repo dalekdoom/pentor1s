@@ -117,7 +117,21 @@ public abstract class GameLogic {
      (@param r: the current row of the board
      @param: the current column of the board)?
      */
-    public void removeLine(){
+    public void checkFullLines(){
+        removeLines();
+        if(fullLines>0){
+            identifyClumps();
+            //realisticFall();
+            ArrayList<Integer> possibleClumps=new ArrayList<Integer>();
+            for(int i=1;i<=clumpNumber;i++)
+                possibleClumps.add(i);
+            realisticFall(possibleClumps);
+            addScore(fullLines);}
+        if(fullLines>0)
+            checkFullLines();
+    }
+
+    public void removeLines(){
         int cellsFull;
         int r = ROWS-1; //lowest row of the board
         fullLines=0;
@@ -132,14 +146,6 @@ public abstract class GameLogic {
                 r++;
             }r--; //next check row above
         }while(cellsFull!=0 && r>=0); //break when a row is complete empty: no full row can come above
-        if(fullLines>0){
-            identifyClumps();
-            //realisticFall();
-            ArrayList<Integer> possibleClumps=new ArrayList<Integer>();
-            for(int i=1;i<=clumpNumber;i++)
-                possibleClumps.add(i);
-            realisticFall(possibleClumps);
-            addScore(fullLines);}
     }
 
     public void realisticFall(ArrayList<Integer> possibleClumps) {

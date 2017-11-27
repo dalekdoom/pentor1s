@@ -77,6 +77,12 @@ public class StartScreen extends InputAdapter implements Screen{
         stage.addActor(newGameButton);
         HighscoreButton = new TextButton("Highscore", skin); // Use the initialized skin
         HighscoreButton.setPosition(Gdx.graphics.getWidth()/2 - Gdx.graphics.getWidth()/4 , 3*Gdx.graphics.getHeight()/6);
+        HighscoreButton.addListener(new ChangeListener() {
+            public void changed (ChangeEvent event, Actor actor) {
+                HighScore highScore=new HighScore();
+                game.setScreen(new HighscoreScreen(game,highScore.getNames(),highScore.getPoints()));
+            }
+        });
         stage.addActor(HighscoreButton);
         stage.addActor(newGameButton);
         QuiteButton = new TextButton("Quite", skin); // Use the initialized skin
