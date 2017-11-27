@@ -11,20 +11,7 @@ public class Constants {
     public final static int COLS=5;
     public final static int width= COLS*100;
     public final static int TIMESPAN_NORMAL = 1000;
-    public final static int[][] pieces = { // DO WE NEED THIS LIST TOO?
-            { 1, 1,0,2,0,3,0,4,0 },  // I in its default orientation.
-            { 2, 1,-1,1,0,1,1,2,0 }, // X in its only orientation.
-            { 3, 0,1,1,1,2,1,2,2 }, // Z in its default orientation
-            { 4, 1,0,2,0,2,1,2,2 }, // V in its default orientation
-            { 5, 0,1,0,2,1,1,2,1 }, // T in its default orientation
-            { 6, 1,0,1,1,2,1,2,2 }, // W in its default orientation
-            { 7, 0,2,1,0,1,1,1,2 }, // U in its default orientation
-            { 8, 1,0,2,0,3,0,3,1 }, // L in its default orientation
-            { 9, 1,-1,1,0,2,-1,3,-1 }, // N in its default orientation
-            { 10, 1,-1,1,0,2,0,3,0 }, // Y in its default orientation
-            { 11, 0,1,1,-1,1,0,2,0 }, // F in its default orientation
-            { 12, 0,1,1,0,1,1,2,0 } // P in its default orientation
-    };
+   
     public final static int[][][] rotations ={{
                 { 1, 1,0,2,0,3,0,4,0 },  // I in its default orientation.
                 { 1, 0,1,0,2,0,3,0,4 },  // Describes piece 1 (the "I" pentomino) in its horizontal orientation.
