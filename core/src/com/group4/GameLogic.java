@@ -92,12 +92,12 @@ public abstract class GameLogic {
 
 
     public void moveRight() {
-        pentomino.movePentominoLeft();
+        pentomino.movePentominoRight();
         aimDrop();
     }
 
     public void moveLeft() {
-        pentomino.movePentominoRight();
+        pentomino.movePentominoLeft();
         aimDrop();
     }
 

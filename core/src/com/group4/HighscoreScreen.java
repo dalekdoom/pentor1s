@@ -96,7 +96,7 @@ public class HighscoreScreen implements Screen{
         stage.addActor(table);
         createBasicSkin();
         backButton = new TextButton("BACK", skin); // Use the initialized skin
-        backButton.setPosition(Gdx.graphics.getWidth()/2 - Gdx.graphics.getWidth()/4 , 1*Gdx.graphics.getHeight()/20);
+        backButton.setPosition(Gdx.graphics.getWidth()/2 - Gdx.graphics.getWidth()/4 , Gdx.graphics.getHeight()/100);
         backButton.addListener(new ChangeListener() {
             public void changed (ChangeEvent event, Actor actor) {
                 game.setScreen(new StartScreen(game));

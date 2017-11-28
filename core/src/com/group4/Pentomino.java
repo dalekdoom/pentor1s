@@ -65,6 +65,7 @@ public class Pentomino extends GameLogic implements InputProcessor {
         System.arraycopy(maxColPerRowRight,0,temp,0,maxRow+1);
         maxColPerRowRight=temp;
         if(checkOverlap()){
+            resetPento();
             return false;}
         drawPentomino();
         return true;

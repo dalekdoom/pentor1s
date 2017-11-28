@@ -16,6 +16,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 
 import static com.group4.Constants.COLS;
+import static com.group4.Constants.MARGIN;
 import static com.group4.Constants.ROWS;
 import static com.group4.Constants.TIMESPAN_NORMAL;
 import static com.group4.Constants.width;
@@ -140,15 +141,12 @@ public class GameScreen extends GameLogic implements Screen {
     @Override
     public void render(float sth) {
         if (super.getRun()){
-            System.out.println(super.getRun());
             int height = Gdx.graphics.getHeight();
             if (System.currentTimeMillis() - time >= TIMESPAN_NORMAL) {
                 if (!super.fall()) {
                     super.checkFullLines();
-                    if (!super.init()) {
+                    if (!super.init()){
                         super.setRun(false);
-                        highscore.add(getScore(),"Micheal");
-                        //super.reset();
                     }
                 }
                 time = System.currentTimeMillis();
@@ -169,19 +167,22 @@ public class GameScreen extends GameLogic implements Screen {
             stage.act();
             stage.draw();
         }
+        else{
+            game.setScreen(new GameOverScreen(game));
+        }
     }
 
     private void drawText(int height) {
         batch.begin();
         font.setColor(Color.BLACK);
         font.getData().setScale(2f);
-        font.draw(batch, "Score", Math.round(1.5*width),(ROWS-7)*(height / ROWS));
+        font.draw(batch, "Score", Math.round(1.5*width),(ROWS-7)*(height / ROWS)-MARGIN);
         font.getData().setScale(2f);
-        font.draw(batch, super.toString(getScore()), Math.round(1.5*width),(ROWS-7)*(height / ROWS)-50);
+        font.draw(batch, super.toString(getScore()), Math.round(1.5*width),(ROWS-7)*(height / ROWS)-6*MARGIN);
         batch.end();
         batch.begin();
-        font.draw(batch, "Highscore", Math.round(1.5*width),(ROWS-5)*(height / ROWS));
-        font.draw(batch, super.toString(highscore.TopScore()), Math.round(1.5*width),(ROWS-5)*(height / ROWS)-50);
+        font.draw(batch, "Highscore", Math.round(1.5*width),(ROWS-6)*(height / ROWS));
+        font.draw(batch, super.toString(highscore.TopScore()), Math.round(1.5*width),(ROWS-6)*(height / ROWS)-5*MARGIN);
         batch.end();
     }
 

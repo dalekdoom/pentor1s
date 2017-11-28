@@ -5,7 +5,6 @@ package com.group4;
  */
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -21,8 +20,8 @@ public class HighScore {
     //in the highscore list
     public HighScore() {
         try {
-            BufferedReader a = new BufferedReader(new FileReader(new File("points.txt")));
-            BufferedReader b = new BufferedReader(new FileReader(new File("names.txt")));
+            BufferedReader a = new BufferedReader(new FileReader("points.txt"));
+            BufferedReader b = new BufferedReader(new FileReader("names.txt"));
             ArrayList<String> temp = new ArrayList(0);
             temp = createArray(a);
             names = createArray(b);
@@ -50,7 +49,7 @@ public class HighScore {
                 pointList.add(points.get(i));
             }
         }
-        new GUI(nameList,pointList);
+        //new GUI(nameList,pointList);
 
     }
 
@@ -105,7 +104,7 @@ public class HighScore {
         addOn(names);
 
         //print when the game finishes
-        new GUI(names,points,true, k);
+        //new GUI(names,points,true, k);
     }
 
 
@@ -129,8 +128,8 @@ public class HighScore {
         try {
             PrintWriter writer;
             if (array.get(0) instanceof Integer)
-                writer = new PrintWriter(new File("points.txt"));
-            else writer = new PrintWriter(new File("names.txt"));
+                writer = new PrintWriter("points.txt");
+            else writer = new PrintWriter("names.txt");
 
             for (int i=0; i<array.size(); i++)
                 writer.println(array.get(i));
