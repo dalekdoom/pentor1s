@@ -4,6 +4,9 @@ package com.group4;
  * Created by Tobias on 27/11/2017.
  */
 
+import com.group4.HighscoreScreen;
+import com.group4.TetrisGame;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -54,11 +57,8 @@ public class HighScore {
     }
 
     public int TopScore(){
-        if(points.size()==0)
-            return 0;
         return points.get(0);
     }
-
     public ArrayList<String> getNames(){
         return names;
     }
@@ -66,9 +66,7 @@ public class HighScore {
         return points;
     }
 
-    public void menuShow(TetrisGame game) {
-        new HighscoreScreen(game,names,points);
-    }
+    public void menuShow(TetrisGame game) {new HighscoreScreen(game,names,points);}
 
 
 

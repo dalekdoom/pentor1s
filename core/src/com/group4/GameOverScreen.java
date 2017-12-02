@@ -17,9 +17,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.FocusListener;
 
+import static com.group4.Constants.COLS;
 import static com.group4.Constants.PADDING;
 import static com.group4.Constants.ROWS;
-import static com.group4.Constants.width;
+import static com.group4.Constants.SIDE;
+import static com.group4.Constants.WIDTH;
 
 /**
  * Created by Tobias on 28/11/2017.
@@ -121,6 +123,7 @@ public class GameOverScreen extends GameLogic implements Screen{
         @Override
         public void render(float delta) {
             int height = Gdx.graphics.getHeight();
+            int width=COLS*100*Gdx.graphics.getWidth()/(WIDTH+SIDE);
             Gdx.gl.glClearColor(1, 1, 1, 1);
             Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
             stage.act();
@@ -136,7 +139,6 @@ public class GameOverScreen extends GameLogic implements Screen{
             font.draw(batch, "YOURE SCORE", width,(ROWS-4)*(height / ROWS));
             font.draw(batch, super.toString(score), width+PADDING,(ROWS-4)*(height / ROWS)-50);
             batch.end();
-
         }
 
         @Override

@@ -18,8 +18,9 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import static com.group4.Constants.COLS;
 import static com.group4.Constants.MARGIN;
 import static com.group4.Constants.ROWS;
+import static com.group4.Constants.SIDE;
 import static com.group4.Constants.TIMESPAN_NORMAL;
-import static com.group4.Constants.width;
+import static com.group4.Constants.WIDTH;
 
 /**
  * Created by Tobias on 08/11/2017.
@@ -142,6 +143,7 @@ public class GameScreen extends GameLogic implements Screen {
     public void render(float sth) {
         if (super.getRun()){
             int height = Gdx.graphics.getHeight();
+            int width=COLS*100*Gdx.graphics.getWidth()/(WIDTH+SIDE);
             if (System.currentTimeMillis() - time >= TIMESPAN_NORMAL) {
                 if (!super.fall()) {
                     super.checkFullLines();
@@ -156,9 +158,9 @@ public class GameScreen extends GameLogic implements Screen {
             batch.begin();
             batch.draw(background, 0, 0, width, height);
             batch.end();
-            drawShape(height);
-            drawNext(height);
-            drawText(height);
+            drawShape(height,width);
+            drawNext(height,width);
+            drawText(height,width);
             if (super.getFullLines() > 0) {
                 batch.begin();
                 batch.draw(score1, width / 2 - 3 / 2 * (width / COLS), height / 2 - (height / ROWS), 3 * (width / COLS), 2 * (height / ROWS));
@@ -172,7 +174,7 @@ public class GameScreen extends GameLogic implements Screen {
         }
     }
 
-    private void drawText(int height) {
+    private void drawText(int height,int width) {
         batch.begin();
         font.setColor(Color.BLACK);
         font.getData().setScale(2f);
@@ -186,7 +188,7 @@ public class GameScreen extends GameLogic implements Screen {
         batch.end();
     }
 
-    private void drawNext(int height) {
+    private void drawNext(int height,int width) {
         next=super.displayNext();
         batch.begin();
         switch (next[0]) {
@@ -259,7 +261,7 @@ public class GameScreen extends GameLogic implements Screen {
         batch.end();
     }
 
-    private void drawShape(int height) {
+    private void drawShape(int height,int width) {
         for (int i = 0; i < ROWS; i++) {
             for (int j = 0; j < COLS; j++) {
                 if (board[i][j] != 0&& board[i][j] != -1) {

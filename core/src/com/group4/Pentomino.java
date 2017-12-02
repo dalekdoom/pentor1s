@@ -312,23 +312,27 @@ public class Pentomino extends GameLogic implements InputProcessor {
             resetPento();
             super.reset();
         }
-        else if(screenX<Gdx.graphics.getWidth()/2){
+        else if(screenX<Gdx.graphics.getWidth()/2 && screenY>Gdx.graphics.getHeight()/4 && screenY<16*Gdx.graphics.getHeight()/17){
             removeAim();
             movePentominoLeft();
             aimDrop();
             drawAim();
         }
-        else if(screenX>=Gdx.graphics.getWidth()/2){
+        else if(screenX>=Gdx.graphics.getWidth()/2 && screenY>Gdx.graphics.getHeight()/4 && screenY<16*Gdx.graphics.getHeight()/17){
             removeAim();
             movePentominoRight();
             aimDrop();
             drawAim();
         }
-        else if(screenY<Gdx.graphics.getHeight()/2){
+        if(screenY<Gdx.graphics.getHeight()/4){
             removeAim();
             rotate();
             aimDrop();
             drawAim();
+        }
+        if(screenY>16*Gdx.graphics.getHeight()/17){
+            removePosition();
+            drop();
         }
         return false;
     }

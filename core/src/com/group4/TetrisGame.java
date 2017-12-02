@@ -8,7 +8,6 @@ public class TetrisGame extends Game {
 	public void create() {
 		showStartScreen();
 	}
-
 	public void showGameScreen() {
 		setScreen(new GameScreen(this));
 	}
