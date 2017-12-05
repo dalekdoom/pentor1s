@@ -224,30 +224,32 @@ public class Pentomino extends GameLogic implements InputProcessor {
     }
 
 
-    public void movePentominoLeft(){
+    public boolean movePentominoLeft(){
         if (row >= ROWS || //if it is below the board
                 col-1+minCol< 0) //if it is to the left of the board
-            return;
+            return false;
         for(int i=row;i<=maxRow+row;i++){
             if(board[i][col-1+maxColPerRowLeft[i-row]]>0)
-                return;
+                return false;
         }
         removePosition();
         col--;
         drawPentomino();
+        return true;
     }
 
-    public void movePentominoRight(){
+    public boolean movePentominoRight(){
         if (row >= ROWS || //if it is below the board
                 col+1+maxCol >= COLS) //if it is to the right of the board
-            return;
+            return false;
         for(int i=row;i<=maxRow+row;i++){
             if(board[i][col+1+maxColPerRowRight[i-row]]>0)
-                return;
+                return false;
         }
         removePosition();
         col++;
         drawPentomino();
+        return true;
     }
 
     public void aimDrop(){
