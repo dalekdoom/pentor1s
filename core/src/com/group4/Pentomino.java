@@ -115,6 +115,13 @@ public class Pentomino extends GameLogic implements InputProcessor {
         return piece;
     }
 
+    public int getCol(){
+        return col;
+    }
+    public int getRotation(){
+        return r;
+    }
+
     public void drawPentomino() {
         board[row][col] = piece[0];
         for (int i = 1; i < 8; i += 2){
@@ -268,6 +275,10 @@ public class Pentomino extends GameLogic implements InputProcessor {
         drawPentomino();
     }
 
+    public int getMinimalDropHeight(){
+        return minimalDropHeight;
+    }
+
     @Override
     public boolean keyDown(int keycode) {
         if (keycode== Input.Keys.UP){
@@ -357,6 +368,44 @@ public class Pentomino extends GameLogic implements InputProcessor {
     @Override
     public boolean scrolled(int amount) {
         return false;
+    }
+
+    public int[] evalPosition(){
+        int cellsFull;
+        int fullLines=0;
+        int connections=0;
+        int holes=0;
+        int touchGround=0;
+        int currentRow=-1;
+        for(int i=1;i<piece.length;i+=2){
+            if(piece[i]+minimalDropHeight!=currentRow) {
+                currentRow = piece[i] + minimalDropHeight;
+                cellsFull = 0;
+                for (int c = 0; c < COLS; c++)
+                    if (board[currentRow][c] != 0) {
+                        cellsFull++;
+                        if (board[currentRow][c] == -1) {
+                            if (c + 1 < COLS &&board[currentRow][c + 1] > 0)
+                                connections++;
+                            if (c - 1 >= 0 && board[currentRow][c - 1] > 0)
+                                connections++;
+                            if (currentRow + 1<ROWS&&board[currentRow + 1][c] == 0 || currentRow + 2<ROWS&&board[currentRow + 1][c]==-1&&board[currentRow + 2][c] == 0)
+                                holes++;
+                            if(currentRow==ROWS-1){
+                                touchGround++;
+                            }
+                        }
+                    } else {
+                        if (currentRow - 1>0&&board[currentRow - 1][c] != 0 || currentRow - 2>0&&board[currentRow - 2][c] != 0 || currentRow - 3>0&&board[currentRow - 3][c] != 0)
+                            holes++;
+                    }
+                if (cellsFull == COLS) {
+                    fullLines++;
+                }
+            }
+        }
+        int[] evalValues={fullLines,connections,holes,touchGround}; //values to evaluate Position of the Pentomino for the bot.
+        return evalValues;
     }
 
 }

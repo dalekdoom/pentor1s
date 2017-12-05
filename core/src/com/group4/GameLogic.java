@@ -56,7 +56,7 @@ public abstract class GameLogic {
             return false;
         aimDrop();
         board=pentomino.getBoard();
-        Bot bot=new Bot(pentomino);
+        SimpleBot bot=new SimpleBot(pentomino);
         bot.playBot();
         Gdx.input.setInputProcessor(pentomino);
         return true;
@@ -80,14 +80,23 @@ public abstract class GameLogic {
     public void addScore(int n){
         highscore+=n*(n*100);
     }
-    /** This method returns/displays the score/high score.
+
+    /** This method returns/displays the score.
      * @param no parameters.
      * @return int (highscore).
      */
-
     public int getScore(){
         return highscore;
     }
+
+    /** This method resets the score to zero.
+     * @param no parameters.
+     * @return int (highscore).
+     */
+    public void resetScore(){
+        this.highscore=0;
+    }
+
     /** This method removes a pentomino from its previous position (to be shifted further down).
      * @param no parameters.
      * @return nothing.
@@ -120,7 +129,6 @@ public abstract class GameLogic {
 
     public void reset() {
         highscore=0;
-        //pentos[0].resetPento();
         listOfClumps = new int[ROWS][COLS];
         pentos=new Pentomino[2];
         Gdx.gl.glClearColor(0, 0, 0, 1);
@@ -136,6 +144,15 @@ public abstract class GameLogic {
     public void aimDrop() {
         pentomino.aimDrop();
         pentomino.drawAim();
+    }
+
+    /** This method makes the piece drop.
+     * @param no parameters.
+     * @return nothing.
+     */
+
+    public void drop() {
+        pentomino.drop();
     }
     /** This method shifts the pentomino left.
      * @param no parameters.
@@ -212,7 +229,7 @@ public abstract class GameLogic {
         do{
             cellsFull=0;
             for (int c=0; c<COLS; c++)
-                if (board[r][c]!=0)
+                if (board[r][c]>0)
                     cellsFull++;
             if (cellsFull==COLS){
                 fullLines++;
@@ -223,7 +240,7 @@ public abstract class GameLogic {
     }
     /**
      * Checks how each of the pentomino clumps can fall down.
-     * @param array list(int)
+     * @param possibleClumps
      * @return nothing.
      */
 
@@ -248,8 +265,6 @@ public abstract class GameLogic {
                                 break outerloop;
                             }
             }
-            System.out.println(possibleClumps);
-            System.out.println(newPossible);
             for(int r=ROWS-1;r>=0;r--)
                 for (int c=0; c<COLS; c++)
                     if (listOfClumps[r][c]>0){

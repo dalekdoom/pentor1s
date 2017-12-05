@@ -19,7 +19,7 @@ import static com.group4.Constants.COLS;
 import static com.group4.Constants.MARGIN;
 import static com.group4.Constants.ROWS;
 import static com.group4.Constants.SIDE;
-import static com.group4.Constants.TIMESPAN_NORMAL;
+import static com.group4.Constants.TIMESPAN_FAST;
 import static com.group4.Constants.WIDTH;
 
 /**
@@ -102,6 +102,7 @@ public class GameScreen extends GameLogic implements Screen {
         block11 = new Texture(Gdx.files.internal("tetris_block11.png"));
         block12 = new Texture(Gdx.files.internal("tetris_block12.png"));
         aimBlock = new Texture(Gdx.files.internal("aim_block.png"));
+        //aimBlock = new Texture(Gdx.files.internal("tetris_block_sinter.png")); christmas mode
         score1=new Texture(Gdx.files.internal("score_1.png"));
         highscore= new HighScore();
         batch = new SpriteBatch();
@@ -144,7 +145,7 @@ public class GameScreen extends GameLogic implements Screen {
         if (super.getRun()){
             int height = Gdx.graphics.getHeight();
             int width=COLS*100*Gdx.graphics.getWidth()/(WIDTH+SIDE);
-            if (System.currentTimeMillis() - time >= TIMESPAN_NORMAL) {
+            if (System.currentTimeMillis() - time >= TIMESPAN_FAST) {
                 if (!super.fall()) {
                     super.checkFullLines();
                     if (!super.init()){
@@ -171,6 +172,7 @@ public class GameScreen extends GameLogic implements Screen {
         }
         else{
             game.setScreen(new GameOverScreen(game));
+            //super.reset();
         }
     }
 

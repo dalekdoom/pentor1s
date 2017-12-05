@@ -15,6 +15,7 @@ public class Constants {
     public final static int WIDTH = COLS*100;
     public final static int SIDE = 750;
     public final static int TIMESPAN_NORMAL = 1000;
+    public final static int TIMESPAN_FAST = 100;
 
     public final static int[][][] rotations ={{
                 { 1, 1,0,2,0,3,0,4,0 },  // I in its default orientation.

@@ -82,6 +82,7 @@ public class GameOverScreen extends GameLogic implements Screen{
             backButton.setPosition(Gdx.graphics.getWidth()/2 - Gdx.graphics.getWidth()/4 , 1*Gdx.graphics.getHeight()/20);
             backButton.addListener(new ChangeListener() {
                 public void changed (ChangeEvent event, Actor actor) {
+                    GameOverScreen.super.resetScore();
                     game.setScreen(new StartScreen(game));
                 }
             });
@@ -93,6 +94,7 @@ public class GameOverScreen extends GameLogic implements Screen{
                     String username = txtUsername.getText();
                     HighScore highscore=new HighScore();
                     highscore.add(score,username);
+                    GameOverScreen.super.resetScore();
                     game.setScreen(new HighscoreScreen(game,highscore.getNames(),highscore.getPoints()));
                 }
             });

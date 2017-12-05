@@ -6,22 +6,15 @@ import static com.group4.Constants.rotations;
  * Created by Tobias on 01/12/2017.
  */
 
-public class Bot extends GameLogic{
+public class SimpleBot extends GameLogic{
     private Pentomino pentomino;
-    private double pentominoHeight=0;
-    private int[] boardEvaluation=new int[4];
-    private double maxEvalValue=0;
-    private double evalValue;
+    private int pentominoHeight=0;
+    private int maxPentominoHeight=0;
     private int dropHeight;
-    private int heightWeight=1000;
-    private int clearsWeight=800;
-    private int connectionsWeight=20;
-    private int touchGroundWeight=500;
-    private int holesWeight=-10;
     private int bestRotation;
     private int bestPosition;
 
-    public Bot (Pentomino pentomino){
+    public SimpleBot (Pentomino pentomino){
         this.pentomino=pentomino;
     }
 
@@ -32,15 +25,12 @@ public class Bot extends GameLogic{
             dropHeight=pentomino.getMinimalDropHeight();
             for(int i=1;i<piece.length;i+=2)
                 pentominoHeight+=piece[i]+dropHeight;
-            boardEvaluation=pentomino.evalPosition();
-            evalValue=heightWeight*(pentominoHeight/(5*15))+clearsWeight*(boardEvaluation[0]/5)+connectionsWeight*(boardEvaluation[1]/10)+holesWeight*(boardEvaluation[2]/15)+touchGroundWeight*(boardEvaluation[3]/5);
-            if(evalValue>maxEvalValue){
-                maxEvalValue=evalValue;
+            if(pentominoHeight>maxPentominoHeight){
+                maxPentominoHeight=pentominoHeight;
                 bestRotation=pentomino.getRotation();
                 bestPosition=pentomino.getCol();
             }
             pentominoHeight=0;
-            evalValue=0;
             pentomino.removeAim();
             while(pentomino.movePentominoRight()){
                 pentomino.aimDrop();
@@ -48,15 +38,12 @@ public class Bot extends GameLogic{
                 dropHeight=pentomino.getMinimalDropHeight();
                 for(int i=1;i<piece.length;i+=2)
                     pentominoHeight+=piece[i]+dropHeight;
-                boardEvaluation=pentomino.evalPosition();
-                evalValue=heightWeight*(pentominoHeight/(5*15))+clearsWeight*(boardEvaluation[0]/5)+connectionsWeight*(boardEvaluation[1]/10)+holesWeight*(boardEvaluation[2]/15)+touchGroundWeight*(boardEvaluation[3]/5);
-                if(evalValue>maxEvalValue){
-                    maxEvalValue=evalValue;
+                if(pentominoHeight>maxPentominoHeight){
+                    maxPentominoHeight=pentominoHeight;
                     bestRotation=pentomino.getRotation();
                     bestPosition=pentomino.getCol();
                 }
                 pentominoHeight=0;
-                evalValue=0;
                 pentomino.removeAim();}
             while(pentomino.movePentominoLeft()){
                 pentomino.aimDrop();
@@ -64,16 +51,12 @@ public class Bot extends GameLogic{
                 dropHeight=pentomino.getMinimalDropHeight();
                 for(int i=1;i<piece.length;i+=2)
                     pentominoHeight+=piece[i]+dropHeight;
-                boardEvaluation=pentomino.evalPosition();
-                System.out.println(100*(boardEvaluation[0]/5)+(boardEvaluation[1]/10)-(boardEvaluation[2]/15));
-                evalValue=heightWeight*(pentominoHeight/(5*15))+clearsWeight*(boardEvaluation[0]/5)+connectionsWeight*(boardEvaluation[1]/10)+holesWeight*(boardEvaluation[2]/15)+touchGroundWeight*(boardEvaluation[3]/5);
-                if(evalValue>maxEvalValue){
-                    maxEvalValue=evalValue;
+                if(pentominoHeight>maxPentominoHeight){
+                    maxPentominoHeight=pentominoHeight;
                     bestRotation=pentomino.getRotation();
                     bestPosition=pentomino.getCol();
                 }
                 pentominoHeight=0;
-                evalValue=0;
                 pentomino.removeAim();}
             pentomino.rotate();
             pentomino.aimDrop();
