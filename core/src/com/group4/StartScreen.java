@@ -27,7 +27,7 @@ public class StartScreen extends InputAdapter implements Screen{
     private Texture background;
     private TextButton newGameButton;
     private TextButton HighscoreButton;
-    private TextButton QuiteButton;
+    private TextButton QuitButton;
 
     public StartScreen(TetrisGame game) {
         this.game = game;
@@ -85,14 +85,14 @@ public class StartScreen extends InputAdapter implements Screen{
         });
         stage.addActor(HighscoreButton);
         stage.addActor(newGameButton);
-        QuiteButton = new TextButton("Quite", skin); // Use the initialized skin
-        QuiteButton.setPosition(Gdx.graphics.getWidth()/2 - Gdx.graphics.getWidth()/4 , 2*Gdx.graphics.getHeight()/6);
-        QuiteButton.addListener(new ChangeListener() {
+        QuitButton = new TextButton("Quit", skin); // Use the initialized skin
+        QuitButton.setPosition(Gdx.graphics.getWidth()/2 - Gdx.graphics.getWidth()/4 , 2*Gdx.graphics.getHeight()/6);
+        QuitButton.addListener(new ChangeListener() {
             public void changed (ChangeEvent event, Actor actor) {
                 Gdx.app.exit();
             }
         });
-        stage.addActor(QuiteButton);
+        stage.addActor(QuitButton);
     }
 
     public void render(float delta) {
